@@ -146,10 +146,10 @@ class Pop3
     /**
      * Send requests
      *
-     * @param string $requests your request in array
+     * @param array $requests your request in array
      * @throws Exception\RuntimeException
      */
-    public function sendRequests($requests = [])
+    public function sendRequests($requests = []): string
     {
         ErrorHandler::start();
         $result = '';

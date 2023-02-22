@@ -4,6 +4,7 @@ namespace Laminas\Mail\Header;
 
 use Laminas\Mime\Mime;
 
+use function iconv;
 use function strtolower;
 use function strtoupper;
 
