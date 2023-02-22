@@ -105,6 +105,9 @@ abstract class AbstractAddressList implements HeaderInterface
                 $decodedValue = HeaderWrap::mimeDecodeValue($value);
                 $wasEncoded   = $wasEncoded || ($decodedValue !== $value);
                 $value        = trim($decodedValue);
+                if (strtolower($value) === "<undisclosed recipients:>") {
+                    return null;
+                }
                 $comments     = self::getComments($value);
                 $value        = self::stripComments($value);
                 $value        = preg_replace(
@@ -202,7 +205,11 @@ abstract class AbstractAddressList implements HeaderInterface
                     $name = HeaderWrap::mimeEncodeValue($name, $encoding);
                 }
 
-                if (preg_match('/^(.+)@([^@]+)$/', $email, $matches)) {
+                if (preg_match('/^(.*)\<(.+)@([^@]+)\>(.*)$/', $email, $matches)) {
+                    $localPart = $matches[2];
+                    $hostname  = $this->idnToAscii($matches[3]);
+                    $email     = sprintf('%s@%s', $localPart, $hostname);
+                } elseif (preg_match('/^(.+)@([^@]+)$/', $email, $matches)) {
                     $localPart = $matches[1];
                     $hostname  = $this->idnToAscii($matches[2]);
                     $email     = sprintf('%s@%s', $localPart, $hostname);
@@ -213,13 +220,6 @@ abstract class AbstractAddressList implements HeaderInterface
                 $emails[] = $email;
             } else {
                 $emails[] = sprintf('%s <%s>', $name, $email);
-            }
-        }
-
-        // Ensure the values are valid before sending them.
-        if ($format !== HeaderInterface::FORMAT_RAW) {
-            foreach ($emails as $email) {
-                HeaderValue::assertValid($email);
             }
         }
 

@@ -7,6 +7,12 @@
     ],
     "homepage": "https://laminas.dev",
     "license": "BSD-3-Clause",
+    "repositories":[
+        {
+            "type": "vcs",
+            "url": "https://github.com/trilogy-group/laminas-validator"
+        }
+    ],
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "ext-iconv": "*",

@@ -4,6 +4,7 @@ namespace Laminas\Mail\Header;
 
 use Laminas\Mime\Mime;
 
+use function iconv;
 use function strtolower;
 use function strtoupper;
 
@@ -114,7 +115,7 @@ class Subject implements UnstructuredInterface
      */
     public function setSubject($subject)
     {
-        $subject = (string) $subject;
+        $subject = HeaderWrap::canBeEncoded($subject) ? $subject : iconv('windows-1255', 'utf-8', $subject);
 
         if (! HeaderWrap::canBeEncoded($subject)) {
             throw new Exception\InvalidArgumentException(
