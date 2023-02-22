@@ -154,7 +154,7 @@ class Pop3
         ErrorHandler::start();
         $result = '';
         foreach ($requests as $request) {
-            if (fwrite($this->socket, $request . "\r\n") === false) {
+            if (fwrite($this->socket, ($request . "\r\n")) === false) {
                 throw new Exception\RuntimeException('cannot write - connection closed?');
             }
             $result = $result.fgets($this->socket)."\r\n";
