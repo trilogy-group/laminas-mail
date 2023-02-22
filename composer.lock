@@ -274,16 +274,16 @@
         },
         {
             "name": "laminas/laminas-validator",
-            "version": "2.31.1",
+            "version": "2.31.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/trilogy-group/laminas-validator.git",
-                "reference": "cdc173404ec73096aea5eb724c6d64de762872c9"
+                "reference": "20146b27074ad141b2e9d20851a3dbf85eb3dddb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/trilogy-group/laminas-validator/zipball/cdc173404ec73096aea5eb724c6d64de762872c9",
-                "reference": "cdc173404ec73096aea5eb724c6d64de762872c9",
+                "url": "https://api.github.com/repos/trilogy-group/laminas-validator/zipball/20146b27074ad141b2e9d20851a3dbf85eb3dddb",
+                "reference": "20146b27074ad141b2e9d20851a3dbf85eb3dddb",
                 "shasum": ""
             },
             "require": {
@@ -377,7 +377,7 @@
                 "chat": "https://laminas.dev/chat",
                 "forum": "https://discourse.laminas.dev"
             },
-            "time": "2023-02-22T04:13:06+00:00"
+            "time": "2023-02-22T06:00:49+00:00"
         },
         {
             "name": "psr/container",
