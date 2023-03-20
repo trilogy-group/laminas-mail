@@ -6,6 +6,7 @@ use Laminas\Mail\Address;
 use Laminas\Mail\AddressList;
 use Laminas\Mail\Headers;
 use Laminas\Mail\Storage\Exception\RuntimeException;
+use Laminas\Mail\Exception;
 
 use function array_filter;
 use function array_map;
@@ -121,7 +122,12 @@ abstract class AbstractAddressList implements HeaderInterface
                     ],
                     $value
                 );
-                return empty($value) ? null : Address::fromString($value, $comments);
+                try {
+                    return empty($value) ? null : Address::fromString($value, $comments);
+                } catch (Exception\InvalidArgumentException $ex) {
+                    // ignore the invalid email address
+                    return null;
+                }
             },
             $values
         );
